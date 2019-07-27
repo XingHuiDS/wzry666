@@ -1,5 +1,6 @@
 package com.bbs.domain;
 
+import com.bbs.utils.DateUtils;
 import org.apache.ibatis.annotations.Insert;
 
 import java.io.Serializable;
@@ -20,6 +21,17 @@ public class Article implements Serializable {
 	private Integer browseCount; //浏览数
 	private Integer zoneId; //交流区
 	private Integer isReport;//举报状态
+    private String sendTimeStr;//转换sendTime类型为string类型，方便前端页面获取
+
+	public String getSendTimeStr() {
+		return sendTimeStr;
+	}
+
+	public void setSendTimeStr(Date sendTime) {
+
+	String date=DateUtils.date2String(sendTime,"yyyy-MM-dd");
+		this.sendTimeStr = date;
+	}
 
 	public Integer getIsReport() {
 		return isReport;
@@ -124,5 +136,8 @@ public class Article implements Serializable {
 				", zoneId=" + zoneId +
 				", isReport=" + isReport +
 				'}';
+
+
+
 	}
 }

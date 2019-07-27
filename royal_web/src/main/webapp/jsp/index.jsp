@@ -196,7 +196,7 @@
                 <ul>
 
 
-                    <c:forEach items="${articleList}" var="article">
+                    <c:forEach items="${articleslist}" var="article">
                         <c:if test="${article.isTop == 1}">
                             <li class="clearfix ding">
                                 <div class="hm-index-title">

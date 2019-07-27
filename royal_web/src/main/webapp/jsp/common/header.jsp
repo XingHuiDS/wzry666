@@ -11,8 +11,7 @@
             $("#log").click(function () {
                 var userName = $("#userName").val();//获取输入框中的值
                 var userPass = $("#userPass").val();//获取输入框中的值
-
-                $.post("/user/login.do", {
+                $.post("${pageContext.request.contextPath}/user/login.do", {
                     "userName": userName,
                     "userPass": userPass
                 }, function (data) {
@@ -41,7 +40,7 @@
                     <a  id="login1"
                        class="to-login">欢迎 ${sessionScope.user.userName}</a>
                     <%--个人中心--%>
-                    <a href=${pageContext.request.contextPath}"/user/userMsg" id="login2"
+                    <a href=${pageContext.request.contextPath}"/user/userInfo" id="login2"
                        class="to-login">个人中心</a>
                     <%--登出--%>
                     <a href="/user/Exit.do" id="login3"
@@ -59,7 +58,7 @@
                     <div class="dialogTop" style="height:25px;">
                         <a href="javascript:;" class="closeDialogBtn">关闭</a>
                     </div>
-                    <form id="form" action="/user/login.do" method="post">
+                    <form id="form" action="${pageContext.request.contextPath}/user/login.do" method="post">
                         <ul class="editInfos">
                             <li>用户名：<input type="text" id="userName" name="userName" class="ipt"/></li>
                             <li>密&nbsp;&nbsp;&nbsp;码：<input type="password" id="userPass" name="userPass" class="ipt"/>
@@ -89,6 +88,13 @@
         $('.box #login').click(function () {
             ala(this);
         });
+
+        $(function (){
+            $("#log").click(function () {
+                location.href="/user/findIndex.do";
+            });
+        });
+
 
 
         //关闭弹窗

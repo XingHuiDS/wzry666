@@ -34,7 +34,7 @@
         </div>
         <div class="hm-header-b">
             <i class="hm-ico-home"></i>
-            <a href="/user/register">首页</a><span>></span>注册页面
+            <a href="/user/findIndex.do">首页</a><span>></span>注册页面
         </div>
     </div>
 </div>
@@ -44,7 +44,7 @@
         <div class="hm-inner"> 
             <div class="reg-box" style="text-align:center;height:200px;padding-top:100px;">
                 <h3>恭喜您，注册成功！3秒后跳转到</h3>
-                <a href="index.jsp"><h2>首页</h2></a>
+                <a href="/user/findIndex.do"><h2>首页</h2></a>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
     setTimeout(index,3000);
 
     function index() {
-        location.href = "${pageContext.request.contextPath}/user/index";
+        location.href = "${pageContext.request.contextPath}/user/findIndex.do";
     }
 </script>
 

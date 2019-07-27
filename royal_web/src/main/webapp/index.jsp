@@ -6,6 +6,7 @@
     <script>
         $(function () {
             location.href="user/findIndex.do";
+
         })
     </script>
 </head>

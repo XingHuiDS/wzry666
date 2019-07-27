@@ -2,6 +2,14 @@
 <!DOCTYPE configuration
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+
+
+
+
+
+
+
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <!-- config params as the following -->
@@ -9,4 +17,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-co
             <property name="reasonable" value="true"/>
         </plugin>
     </plugins>
+
+
+
+
+
+
 </configuration>
