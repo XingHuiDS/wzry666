@@ -1,18 +1,31 @@
 package com.bbs.domain;
 
-import java.io.Serializable;
+import com.bbs.utils.DateUtils;
+
 import java.util.Date;
 
-/**
- * 举报
- */
-public class Report implements Serializable {
+/*
+   举报
+*/
+public class Report {
     private Integer reportId;
     private String reportContent;//举报内容
     private Date reportTime;//举报时间
+    private String reportTimeStr;
     private String reportUserName;//举报人
-    private Integer reportStatus;//举报状态
-    private Integer articleId;//文章id
+    private Integer reportStatus;//处理状态 0代表未处理，1代表已经处理
+    private Integer articleId;//文章ID
+
+    public String getReportTimeStr() {
+        if (reportTime!=null){
+            reportTimeStr = DateUtils.date2String(reportTime,"yyyy-MM-dd HH:mm");
+        }
+        return reportTimeStr;
+    }
+
+    public void setReportTimeStr(String reportTimeStr) {
+        this.reportTimeStr = reportTimeStr;
+    }
 
     public Integer getReportId() {
         return reportId;

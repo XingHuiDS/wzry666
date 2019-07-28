@@ -87,9 +87,9 @@ $(function(){
 
     })();
     (function(){
-        $('#newTopicBtn').click(function(event) {
-            $('.ft-box').fadeIn(120);
-        });
+        // $('#newTopicBtn').click(function(event) {
+        //     $('.ft-box').fadeIn(120);
+        // });
         $('.to-login').click(function(event) {
             $('.login-box').fadeIn(120);
         });

@@ -2,36 +2,48 @@ package com.bbs.domain;
 
 import java.io.Serializable;
 
-/*
-	交流区
-*/
-public class Upvote implements Serializable {
-	private Integer upvoteArticleId; //帖子编号
-	private String upvoteUserName; //点赞人
-	private Integer isUpvote; //点赞状态（暂时不需要）
-	
-	public Integer getUpvoteArticleId() {
-		return upvoteArticleId;
-	}
-	
-	public void setUpvoteArticleId(Integer upvoteArticleId) {
-		this.upvoteArticleId = upvoteArticleId;
-	}
-	
-	public String getUpvoteUserName() {
-		return upvoteUserName;
-	}
-	
-	public void setUpvoteUserName(String upvoteUserName) {
-		this.upvoteUserName = upvoteUserName;
-	}
-	
-	public Integer getIsUpvote() {
-		return isUpvote;
-	}
-	
-	public void setIsUpvote(Integer isUpvote) {
-		this.isUpvote = isUpvote;
-	}
-	
+/**
+ * @author 廖艺铭
+ * @Title: Upvote
+ * @ProjectName wzry_lt
+ * @Description: TODO
+ * @date 2019/6/24 16:58
+ */
+public class Upvote implements Serializable{
+    private String upvoteUserName;      //点赞人
+    private Integer upvoteArticleId;    //点赞帖子
+    private Integer isUpvote;           //点赞状态，0代表未点赞，1代表已点赞（默认）
+
+    public String getUpvoteUserName() {
+        return upvoteUserName;
+    }
+
+    public void setUpvoteUserName(String upvoteUserName) {
+        this.upvoteUserName = upvoteUserName;
+    }
+
+    public Integer getUpvoteArticleId() {
+        return upvoteArticleId;
+    }
+
+    public void setUpvoteArticleId(Integer upvoteArticleId) {
+        this.upvoteArticleId = upvoteArticleId;
+    }
+
+    public Integer getIsUpvote() {
+        return isUpvote;
+    }
+
+    public void setIsUpvote(Integer isUpvote) {
+        this.isUpvote = isUpvote;
+    }
+
+    @Override
+    public String toString() {
+        return "Upvote{" +
+                "upvoteUserName='" + upvoteUserName + '\'' +
+                ", upvoteArticleId=" + upvoteArticleId +
+                ", isUpvote=" + isUpvote +
+                '}';
+    }
 }

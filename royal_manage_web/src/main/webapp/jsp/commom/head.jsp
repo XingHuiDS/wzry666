@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" id="company_logo" href="javascript:void(0);" >厦门黑马程序员</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/main.jsp" >后台操作系统</a>
             </div>
 
             <div class="collapse navbar-collapse" id="hrms-navbar-collapse-1">
@@ -35,7 +35,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">账号管理 <span class="caret"></span></a>
                         <ul class="dropdown-menu nav nav-pills nav-stacked">
                             <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>欢迎您,超級管理員</a></li>
-                            <li><a href="/logout" class="hrms_logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> 账号退出</a></li>
+                            <li><a href="/" class="hrms_logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> 账号退出</a></li>
                         </ul>
                     </li>
                 </ul><!-- /.nav navbar-nav navbar-right -->

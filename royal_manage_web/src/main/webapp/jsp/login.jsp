@@ -24,10 +24,10 @@
                     <form role="form" method="post" id="login_form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="用户名" name="username" autofocus>
+                                <input class="form-control" placeholder="用户名" name="userName" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="密码" name="userpass" type="password">
+                                <input class="form-control" placeholder="密码" name="userPass" type="password">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <!--<a href="javascript:void(0)" class="btn btn-lg btn-success btn-block" id='login_btn'>登录</a>-->
@@ -40,6 +40,48 @@
         </div>
     </div>
 </div>
+
+<script>
+    $.fn.serializeJson=function(){
+        var serializeObj={};
+        var array=this.serializeArray();
+        var str=this.serialize();
+        $(array).each(function(){
+            if(serializeObj[this.name]){
+                if($.isArray(serializeObj[this.name])){
+                    serializeObj[this.name].push(this.value);
+                }else{
+                    serializeObj[this.name]=[serializeObj[this.name],this.value];
+                }
+            }else{
+                serializeObj[this.name]=this.value;
+            }
+        });
+        return serializeObj;
+    };
+    $(function () {
+        //1.给登录按钮绑定单击事件
+        $("#btn_sub").click(function () {
+            //2.发送ajax请求，提交表单数据
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                contentType:'application/json',
+                url:'user/login.do',
+                data:JSON.stringify($("#login_form").serializeJson()),
+                success:function (data) {
+                    if(data.success){
+                        //登录成功
+                        location.href="/jsp/main.jsp";
+                    }else{
+                        //登录失败
+                        $("#errorMsg").html(data.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

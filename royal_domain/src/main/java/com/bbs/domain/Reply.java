@@ -1,19 +1,43 @@
 package com.bbs.domain;
 
-import java.io.Serializable;
+import com.bbs.utils.DateUtils;
+
 import java.util.Date;
 
 /*
 	回复评论
 */
-public class Reply implements Serializable {
+public class Reply {
 	private Integer replyId; //回复编号
 	private String replyContent; //内容
 	private Date replyTime; //回复时间
+    private String replyTimeStr; //时间字符串格式
 	private String replyUserName; //回复人
 	private Integer commentId; //该回复所属的评论
-	
-	public Integer getReplyId() {
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "replyId=" + replyId +
+                ", replyContent='" + replyContent + '\'' +
+                ", replyTime=" + replyTime +
+                ", replyUserName='" + replyUserName + '\'' +
+                ", commentId=" + commentId +
+                '}';
+    }
+
+    public String getReplyTimeStr() {
+        if(replyTime != null){
+            replyTimeStr = DateUtils.date2String(replyTime, "yyyy-MM-dd,HH:mm:ss");
+        }
+        return replyTimeStr;
+    }
+
+    public void setReplyTimeStr(String replyTimeStr) {
+        this.replyTimeStr = replyTimeStr;
+    }
+
+    public Integer getReplyId() {
 		return replyId;
 	}
 	

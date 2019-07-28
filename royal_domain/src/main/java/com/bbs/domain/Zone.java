@@ -1,35 +1,37 @@
 package com.bbs.domain;
 
-/*
-	交流区
-*/
+/**
+ * 交流区板块
+ */
 public class Zone {
-	private Integer zoneId; //交流区编号
-	private String zoneName; //交流区的名称
-	private Integer isDef; //是否默认，0代表不是默认，1代表默认
-	
-	public Integer getZoneId() {
-		return zoneId;
-	}
-	
-	public void setZoneId(Integer zoneId) {
-		this.zoneId = zoneId;
-	}
-	
-	public String getZoneName() {
-		return zoneName;
-	}
-	
-	public void setZoneName(String zoneName) {
-		this.zoneName = zoneName;
-	}
-	
-	public Integer getIsDef() {
-		return isDef;
-	}
-	
-	public void setIsDef(Integer isDef) {
-		this.isDef = isDef;
-	}
-	
+    //交流区编号
+    private int zoneId;
+    //交流区名字
+    private String zoneName;
+    //是否默认，1代表默认，2代表非默认
+    private int isDef;
+
+    public int getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(int zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
+
+    public int getIsDef() {
+        return isDef;
+    }
+
+    public void setIsDef(int isDef) {
+        this.isDef = isDef;
+    }
 }
