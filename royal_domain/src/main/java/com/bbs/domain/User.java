@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private Integer userId;//用户id
-    private String userName;//用户名
-    private String userPass;//密码
-    private String email;//邮箱
-    private String picUrl;//头像
-    private Integer role;//1代表普通用户；2代表高级用户，3代表超级管理员
-    private Date lastLoginTime;//最后登录时间
-    private Integer loginStatus;//登录状态，0代表未登录，1代表已登录
-    private Integer talkStatus;//发言状态，0为屏蔽（默认）,1已屏蔽
-    private Integer isupdatig;//升级申请（0-未处理，1-已处理）
-    private Integer updateStatus;//申请升级审核状态（0-未处理，1-已处理）
+    private Integer userId;         //用户ID
+    private String userName;        //用户名
+    private String userPass;        //密码
+    private String email;           //邮箱
+    private String picUrl;          //头像
+    private Integer role;           //1代表普通用户；2代表高级用户，3代表超级管理员
+    private String roleString;     //1代表普通用户；2代表高级用户，3代表超级管理员
+    private String lastLoginTime;     //最后登录时间
+    private Integer loginStatus;    //登录状态，0代表未登录，1代表已登录
+    private Integer talkStatus;     //发言状态，0代表未屏蔽发言（默认），1代表已屏蔽发言
+    private Integer isupdating;     //申请升级(0-未申请,1-已申请)
+    private Integer updateStatus;   //申请升级审核状态(0-未处理,1-已处理)
 
     public Integer getUserId() {
         return userId;
@@ -64,11 +65,19 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public Date getLastLoginTime() {
+    public String getRoleString() {
+        return roleString;
+    }
+
+    public void setRoleString(String roleString) {
+        this.roleString = roleString;
+    }
+
+    public String getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(Date lastLoginTime) {
+    public void setLastLoginTime(String lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
@@ -88,12 +97,12 @@ public class User implements Serializable {
         this.talkStatus = talkStatus;
     }
 
-    public Integer getIsupdatig() {
-        return isupdatig;
+    public Integer getIsupdating() {
+        return isupdating;
     }
 
-    public void setIsupdatig(Integer isupdatig) {
-        this.isupdatig = isupdatig;
+    public void setIsupdating(Integer isupdating) {
+        this.isupdating = isupdating;
     }
 
     public Integer getUpdateStatus() {
@@ -113,10 +122,11 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", picUrl='" + picUrl + '\'' +
                 ", role=" + role +
-                ", lastLoginTime=" + lastLoginTime +
+                ", roleString='" + roleString + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
                 ", loginStatus=" + loginStatus +
                 ", talkStatus=" + talkStatus +
-                ", isupdatig=" + isupdatig +
+                ", isupdating=" + isupdating +
                 ", updateStatus=" + updateStatus +
                 '}';
     }
