@@ -44,6 +44,7 @@ public class IndexController {
         //登录状态1为登入
         String loginStatus = "1";
         List<UserInfo> userList = userInfoService.loadAllLogined(loginStatus);
+        List<UserInfo> usersList = userInfoService.findAllUsers();
         List<Zone> zoneList = zoneService.findAll();
 
         Integer zoneId = -1;
@@ -64,6 +65,7 @@ public class IndexController {
 
         mv.addObject("zoneList",zoneList);
         mv.addObject("userList",userList);
+        mv.addObject("userList",usersList);
         mv.addObject("articleList",articleList);
         mv.addObject("todayCount",todayCount);
         mv.addObject("allCount",allCount);

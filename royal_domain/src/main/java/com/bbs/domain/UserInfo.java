@@ -2,13 +2,7 @@ package com.bbs.domain;
 
 import java.io.Serializable;
 
-/**
- * @author 廖艺铭
- * @Title: UserInfo
- * @ProjectName wzry_lt
- * @Description: TODO
- * @date 2019/6/24 17:03
- */
+
 public class UserInfo implements Serializable {
     private Integer userId;         //用户ID
     private String userName;        //用户名

@@ -1,6 +1,7 @@
 package com.bbs.service;
 
 import com.bbs.domain.Article;
+import com.bbs.domain.UserInfo;
 
 import java.util.List;
 
@@ -120,4 +121,6 @@ public interface ArticleService {
      * @param articleId
      */
     void changeArticleStatus(Integer articleId);
+
+  UserInfo findByUserInfo(Article article);
 }

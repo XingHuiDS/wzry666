@@ -210,4 +210,11 @@ public interface UserInfoDao {
      */
     @Select("select * from bbs_user_table where userName = #{username}")
     UserInfo findUserByUsername(String username);
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Select("select * from bbs_user_table ")
+    List<UserInfo> findAllUsers();
 }

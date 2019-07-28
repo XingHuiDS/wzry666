@@ -156,4 +156,6 @@ public interface UserInfoService {
      * @return
      */
     UserInfo findUserByUsername(String username);
+
+    List<UserInfo> findAllUsers();
 }

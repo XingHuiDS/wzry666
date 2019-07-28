@@ -1,6 +1,7 @@
 package com.bbs.dao;
 
 import com.bbs.domain.Article;
+import com.bbs.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -136,4 +137,7 @@ public interface ArticleDao {
      */
     @Update("update bbs_article_table set isReport = 0 where articleId = #{articleid}")
     void changeArticleStatus(Integer articleId);
+
+    @Select("select * from bbs_user_table where userName = #{senderName}  ")
+    UserInfo findByUserInfo(Article article);
 }

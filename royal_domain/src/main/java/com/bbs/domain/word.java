@@ -1,20 +1,19 @@
 package com.bbs.domain;
 
-import java.io.Serializable;
-
 /**
- * 敏感词
+ * 敏感词板块
+ * @date 2019/6/24 16:58
  */
-public class word implements Serializable {
-    private Integer wordId;//
-    private String word;//敏感词
-    private Integer status;//是否启用
+public class Word {
+    private int wordId; //敏感词ID
+    private String word; //敏感词
+    private int status; //是否启用
 
-    public Integer getWordId() {
+    public int getWordId() {
         return wordId;
     }
 
-    public void setWordId(Integer wordId) {
+    public void setWordId(int wordId) {
         this.wordId = wordId;
     }
 
@@ -26,20 +25,11 @@ public class word implements Serializable {
         this.word = word;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "word{" +
-                "wordId=" + wordId +
-                ", word='" + word + '\'' +
-                ", status=" + status +
-                '}';
     }
 }

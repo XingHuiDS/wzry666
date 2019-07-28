@@ -42,7 +42,6 @@
             $("#navUL li").click(function(){
                 var zoneId = $(this).attr("id");
                 $("#zoneId").val(zoneId);
-
                 $("#article_zoneId").val(zoneId);
 
                 $("#navUL li").removeClass("current");

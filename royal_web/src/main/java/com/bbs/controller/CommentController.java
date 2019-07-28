@@ -47,6 +47,7 @@ public class CommentController {
         List<Comment> comments = commentService.findComment(articleId);
         //查询当前帖子
         Article article = articleService.findById(articleId);
+        UserInfo userImg=  articleService.findByUserInfo(article);
         //帖子浏览数量加一
         articleService.addBrowserCount(articleId);
         UserInfo user = (UserInfo) request.getSession().getAttribute("user");
@@ -63,7 +64,8 @@ public class CommentController {
         //敏感词过滤
         List<Word> words = wordService.findByStatus(1);
         filter(article,words);
-
+        mv.addObject("userImg",userImg);
+        mv.addObject("article",article);
         mv.addObject("article",article);
         mv.addObject("commentList",comments);
         mv.setViewName("getArticle");

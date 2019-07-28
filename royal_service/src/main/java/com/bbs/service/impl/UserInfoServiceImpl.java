@@ -214,5 +214,10 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoDao.findUserByUsername(username);
     }
 
+    @Override
+    public List<UserInfo> findAllUsers() {
+        return userInfoDao.findAllUsers();
+    }
+
 
 }

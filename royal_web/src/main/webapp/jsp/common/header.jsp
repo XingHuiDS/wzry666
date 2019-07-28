@@ -41,7 +41,7 @@
                 <c:if test="${sessionScope.user != null}">
                     <%--欢迎++用户名--%>
                     <a  id="login1"
-                       class="to-login">欢迎 ${sessionScope.user.roleString} ${sessionScope.user.userName}</a>
+                       class="to-login">欢迎 ${sessionScope.user.roleString} : ${sessionScope.user.userName}</a>
                     <%--个人中心--%>
                     <a href=${pageContext.request.contextPath}"/userInfo/userMsg" id="login2"
                        class="to-login">个人中心</a>

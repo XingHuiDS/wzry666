@@ -2,13 +2,7 @@ package com.bbs.domain;
 
 import java.io.Serializable;
 
-/**
- * @author 廖艺铭
- * @Title: Upvote
- * @ProjectName wzry_lt
- * @Description: TODO
- * @date 2019/6/24 16:58
- */
+
 public class Upvote implements Serializable{
     private String upvoteUserName;      //点赞人
     private Integer upvoteArticleId;    //点赞帖子

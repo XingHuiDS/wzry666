@@ -2,6 +2,7 @@ package com.bbs.service.impl;
 
 import com.bbs.dao.ArticleDao;
 import com.bbs.domain.Article;
+import com.bbs.domain.UserInfo;
 import com.bbs.service.ArticleService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void changeArticleStatus(Integer articleId) {
         articleDao.changeArticleStatus(articleId);
+    }
+
+    @Override
+    public UserInfo findByUserInfo(Article article) {
+        return articleDao.findByUserInfo(article);
     }
 
 }

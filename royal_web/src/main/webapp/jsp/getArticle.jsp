@@ -28,14 +28,14 @@
         <!--帖子标题，点赞数，回复数，搜索-->
         <div class="hm-bbs-info">
             <div class="hm-bbs-icon l" style="width:130px;">
-                <span><img src="${pageContext.request.contextPath}/images/default.png" height="100"/></span>
+                <span><img src="${pageContext.request.contextPath}/images/default.png" height="80"/></span>
             </div>
             <div class="hm-bbs-info-in l" style="margin-left:30px;">
                 <div class="t clearfix">
                     <h2 class="l">${article.title}</h2>
                     <div class="hm-detail-fun l">
                         <span id="like" class="icon-like">
-                              <a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >点赞
+                              <a href="javascript:;" id="upvoteCount" onclick="upvoteCount()">点赞
                                      <i></i>
                                   ${article.upvoteCount}
                              </a>
@@ -65,12 +65,13 @@
                 <!--原帖楼-->
                 <li class="floor clearfix">
                     <div class="floorer-info l">
-                        <div class="floorer-photo"><img src="${pageContext.request.contextPath}/images/default.png"/></div>
+                        <div class="floorer-photo"><img src="/${userImg.picUrl}"/>
+                        </div>
                         <div class="floorer-name">${article.senderName}</div>
                     </div>
                     <div class="floor-con l">
                         <div class="floor-info clearfix">
-                            <div class="floor-time l">${article.sendTimeStr}</div>
+                            <div class="floor-time l">发帖时间：${article.sendTimeStr}</div>
                             <div class="r">沙发</div>
                             <div class="r">浏览数:${article.browseCount}&nbsp;&nbsp;&nbsp;</div>
                         </div>
@@ -81,23 +82,24 @@
                             <div class="floor-ans"></div>
                         </div>
 
-                            <span class="icon-comment">
+                        <span class="icon-comment">
                                 <a href="#comment"> <i></i> 评论</a>
                             </span>
-                        </div>
+
+                    </div>
                 </li>
             </ul>
-
+            <!--评论楼-->
             <ul id="comments">
                 <c:forEach items="${commentList}" var="comment" varStatus="vsl">
                     <li class="floor clearfix">
                         <div class="floorer-info l">
-                            <div class="floorer-photo"><img src="${pageContext.request.contextPath}/images/default.png"/></div>
+                            <div class="floorer-photo" id="commentsimg"><img src="${pageContext.request.contextPath}/images/default.png"/></div>
                             <div class="floorer-name">${comment.commentUserName}</div>
                         </div>
                         <div class="floor-con l">
                             <div class="floor-info clearfix">
-                                <div class="floor-time l">${comment.commentTimeStr}</div>
+                                <div class="floor-time l">回帖时间：${comment.commentTimeStr}</div>
                                 <div class="r">${vsl.index+2}楼</div>
                             </div>
                             <div class="floor-art-ans">
@@ -111,7 +113,8 @@
                                     </ul>
                                 </div>
                                 <span class="icon-comment">
-                                    <a href="javascript:;" onclick="showDialog(${vsl.index+2},${comment.commentId})"> <i></i> 回复</a>
+                                    <a href="javascript:;"
+                                       onclick="showDialog(${vsl.index+2},${comment.commentId})"> <i></i> 回复</a>
                                 </span>
                             </div>
                         </div>
@@ -124,8 +127,6 @@
         <!--发表评论-->
         <div class="detail-to-comment">
             <div class="tit"><a name="comment">发表评论</a></div>
-            <!-- 未登录时候显示 <div class="con">您没有登录论坛，请登录后再进行回复</div>-->
-
             <!-- 登录后显示评论输入框-->
             <c:if test="${sessionScope.user != null}">
                 <form action="${pageContext.request.contextPath}/comment/saveComment.do" method="post">
@@ -143,18 +144,16 @@
                 </form>
             </c:if>
             <c:if test="${sessionScope.user == null}">
-                <div class="con">您没有登录论坛，请
-                    <a href="javascript:;" onclick="ala('#login')">登录</a>
-                    后再进行回复</div>
+                <div class="con">
+                    请<a href="javascript:;" onclick="ala('#login')">登录</a>后再进行回复
+                </div>
             </c:if>
         </div>
     </div>
 </div>
 
-
 <!-- 底部 -->
 <jsp:include page="common/footer.jsp"/>
-
 
 <!-- 回复弹出框 -->
 <form id="replyForm" action=${pageContext.request.contextPath}"/reply/saveReply.do" method="post">
@@ -201,7 +200,7 @@
             </div>
             <div class="win_ft">
                 <div class="win_ft_in">
-                    <input type="submit" class="btn" value="发表" />
+                    <input type="submit" class="btn" value="发表"/>
                 </div>
             </div>
         </div>
@@ -213,22 +212,25 @@
     <a id="newTopicBtn" href="javascript:;" class="newTopic"><span></span>举报</a>
     <a href="#" class="goTop"><i></i><span>返回<br/>顶部</span></a>
 </div>
-     <%--隐藏域：点赞表获取点赞状态 1表示已点赞（默认），0未点赞--%>
-    <input type="hidden" id="flag" name="commentUserName" value="${upvote.isUpvote}">
 
+<%--隐藏域：点赞表获取点赞状态 1表示已点赞（默认），0未点赞--%>
+<input type="hidden" id="flag" name="commentUserName" value="${upvote.isUpvote}">
 
 
 <script>
     //获取所有评论回复
     $(function () {
 
-        if(${empty sessionScope.user.userName}){
-            $("#like").attr("class","icon-like");
-        }else {
-            if($("#flag").val() === '0') {
-                $("#like").attr("class","icon-like");
-            }else {
-                $("#like").attr("class","icon-liked").html('<a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >已点赞\n' +
+
+
+
+        if (${empty sessionScope.user.userName}) {
+            $("#like").attr("class", "icon-like");
+        } else {
+            if ($("#flag").val() === '0') {
+                $("#like").attr("class", "icon-like");
+            } else {
+                $("#like").attr("class", "icon-liked").html('<a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >已点赞\n' +
                     '                                     <i></i>\n' +
                     '                                  ${upvote.isUpvote}\n' +
                     '                             </a>');
@@ -236,56 +238,50 @@
         }
 
 
-
-            var array = [];
+        var array = [];
         <c:forEach items="${commentList}" var="t">
-            array.push(${t.commentId}); //js中可以使用此标签，将EL表达式中的值push到数组中
+        array.push(${t.commentId}); //js中可以使用此标签，将EL表达式中的值push到数组中
         </c:forEach>
-        for(var i=0;i<array.length;i++){
+        for (var i = 0; i < array.length; i++) {
             getReply(array[i]);
         }
-
-
-
 
 
     });
 
     //更新点赞数
     function upvoteCount() {
-        if('${sessionScope.user.userName}'!==''){
-            if($("#flag").val() === '0'){
+        if ('${sessionScope.user.userName}' !== '') {
+            if ($("#flag").val() === '0') {
 
                 $.ajax({
-                    "url":${pageContext.request.contextPath}"/upvote/addUpvoteCount?isUpvote=1&articleId="+'${article.articleId}'+"&upvoteUserName="+'${sessionScope.user.userName}',
-                    "type":"POST",
-                    "success":function (data) {
+                    "url": ${pageContext.request.contextPath}"/upvote/addUpvoteCount?isUpvote=1&articleId=" + '${article.articleId}' + "&upvoteUserName=" + '${sessionScope.user.userName}',
+                    "type": "POST",
+                    "success": function (data) {
                         // alert(data.upvoteCount);
                         $("#flag").val(1);
-                        $("#like").attr("class","icon-liked").html('<a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >已点赞\n' +
+                        $("#like").attr("class", "icon-liked").html('<a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >取消点赞\n' +
                             '                                     <i></i>\n' +
-                            '                                  '+data.upvoteCount+'\n' +
+                            '                                  ' + data.upvoteCount + '\n' +
                             '                             </a>');
-                        <%--location.href = ${pageContext.request.contextPath}"/comment/findComment.do"--%>
                     }
                 })
-            }else {
+            } else {
 
                 $.ajax({
-                    "url":${pageContext.request.contextPath}"/upvote/deleteUpvoteCount?isUpvote=0&articleId="+'${article.articleId}'+"&upvoteUserName="+'${sessionScope.user.userName}',
-                    "type":"POST",
-                    "success":function (data) {
+                    "url": ${pageContext.request.contextPath}"/upvote/deleteUpvoteCount?isUpvote=0&articleId=" + '${article.articleId}' + "&upvoteUserName=" + '${sessionScope.user.userName}',
+                    "type": "POST",
+                    "success": function (data) {
                         // alert(data.upvoteCount);
-                        $("#like").attr("class","icon-like").html("<a  href=\"javascript:;\" id=\"upvoteCount\" onclick=\"upvoteCount()\" >点赞\n" +
+                        $("#like").attr("class", "icon-like").html("<a  href=\"javascript:;\" id=\"upvoteCount\" onclick=\"upvoteCount()\" >点赞\n" +
                             "                                     <i></i>\n" +
-                            "                                  "+data.upvoteCount+"\n" +
+                            "                                  " + data.upvoteCount + "\n" +
                             "                             </a>");
                         $("#flag").val(0);
-                        <%--location.href = ${pageContext.request.contextPath}"/comment/findComment.do?articleId="+'${article.articleId}'--%>
                     }
                 })
             }
-        }else {
+        } else {
             alert("请登录");
             ala($('#login'));
         }
@@ -304,41 +300,44 @@
     //弹出举报
     $(function () {
         $('#newTopicBtn').click(function () {
-                if (${sessionScope.user == null}){
-                    alert("请登录账户");
-                    ala("#login");
-                }else {
-                    if ('${article.senderName}' === '${sessionScope.user.userName}'){
-                        alert("不能举报自己");
-                    }else {$('.report-box').fadeIn(120);}
-
+            if (${sessionScope.user == null}) {
+                alert("请登录账户");
+                // ala("#login");
+            } else {
+                if ('${article.senderName}' === '${sessionScope.user.userName}') {
+                    alert("不能举报自己");
+                } else {
+                    $('.report-box').fadeIn(120);
                 }
+
+            }
         });
 
-        if('${sessionScope.msg}'==='1'){
+        if ('${sessionScope.msg}' === '1') {
             alert("您已被禁言!");
         }
     });
 
 
     <%--获取评论回复函数--%>
+
     function getReply(commentId) {
         $.ajax({
-            "url": ${pageContext.request.contextPath}"/reply/findByCommentId.do?commentId="+commentId,
+            "url": ${pageContext.request.contextPath}"/reply/findByCommentId.do?commentId=" + commentId,
             "contentType": "application/json;charset=UTF-8",
             "type": "post",
             "success": function (data) {
                 var replies = "";
-                $.each(data,function (index, ele) {
+                $.each(data, function (index, ele) {
                     replies += '<li class="clearfix"><div class="floor-ans-pho l">\n' +
-                        ' <img src="${pageContext.request.contextPath}/images/default.png"/>\n' +
+                        ' <img src="${pageContext.request.contextPath}/${sessionScope.user.picUrl}"/>\n' +
                         '</div>\n' +
                         '<div class="floor-ans-con l" id="reply">\n' +
                         '<span class="name" id="replyUsername">' + ele.replyUserName + '</span>：' + ele.replyContent + '\n' +
                         '<span class="ans-time" id="replyTime">' + ele.replyTimeStr + '</span>\n' +
                         '</div></li>';
-                        // alert(ele.commentId);
-                        $("#replies"+ele.commentId).html(replies);
+                    // alert(ele.commentId);
+                    $("#replies" + ele.commentId).html(replies);
                 })
             }
         })
@@ -349,9 +348,10 @@
         var loginUser = "${sessionScope.user.userName}";
         if (!loginUser) {
             alert("请登录");
-            ala($('#login'));
+            // ala($('#login'));
             return;
-        };
+        }
+        ;
         $("#commentId").val(commentId);
         $('#reply_pop').css('display', 'block');
         $("#floorSpan").html(num);
