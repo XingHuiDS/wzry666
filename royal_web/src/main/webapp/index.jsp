@@ -5,7 +5,8 @@
     <script src="js/jquery-1.7.2.min.js"></script>
     <script>
         $(function () {
-            location.href="article/getArticleList.do";
+            /*location.href="article/getArticleList.do";*/
+            location.href="jsp/index.jsp";
         })
     </script>
 </head>

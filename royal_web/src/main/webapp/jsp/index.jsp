@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -18,7 +21,7 @@
         <div class="hm-inner-r r">
             <div class="box">
                 <a href="javascript:;" id="login" class="to-login">游客登录</a>
-                <a href="register.html">【新用户注册】</a>
+                <a href="register.jsp">【新用户注册】</a>
                 <div id="dialogBg"></div>
                 <div id="dialog" class="animated">
                     <img class="dialogIco" width="50" height="40" src="../images/ico.png"/>
@@ -99,7 +102,7 @@
 
                     <li class="clearfix ding">
                         <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.html">求官方出艾琳英雄活动</a>
+                            <i class="set-to-top">顶</i> <a href="getArticle.jsp">求官方出艾琳英雄活动</a>
                         </div>
                         <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
                         <div class="hm-index-info l">
@@ -116,7 +119,7 @@
 
                     <li class="clearfix ding">
                         <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.html">求官方出艾琳英雄活动</a>
+                            <i class="set-to-top">顶</i> <a href="getArticle.jsp">求官方出艾琳英雄活动</a>
                         </div>
                         <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
                         <div class="hm-index-info l">
@@ -129,7 +132,7 @@
                     </li>
                     <li class="clearfix ding">
                         <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.html">求官方出艾琳英雄活动</a>
+                            <i class="set-to-top">顶</i> <a href="getArticle.jsp">求官方出艾琳英雄活动</a>
                         </div>
                         <div class="hm-index-con">本人玩得迟，所以看到别人用艾琳的时候，特别羡慕，现贵族6了，很想要一个艾琳，我身边很多朋友也想要，求</div>
                         <div class="hm-index-info l">
@@ -146,7 +149,7 @@
 
                     <li class="clearfix">
                         <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.html">排位赛BUG，排不上！</a>
+                            <i class="set-to-top">顶</i> <a href="getArticle.jsp">排位赛BUG，排不上！</a>
                         </div>
                         <div class="hm-index-con">现在黄金2，无论怎么匹配，都匹配不到？有次匹配了10分钟，这是为什么？</div>
                         <div class="hm-index-info l">
@@ -163,7 +166,7 @@
 
                     <li class="clearfix">
                         <div class="hm-index-title">
-                            <i class="set-to-top">顶</i> <a href="getArticle.html">排位赛BUG，排不上！</a>
+                            <i class="set-to-top">顶</i> <a href="getArticle.jsp">排位赛BUG，排不上！</a>
                         </div>
                         <div class="hm-index-con">现在黄金2，无论怎么匹配，都匹配不到？有次匹配了10分钟，这是为什么？</div>
                         <div class="hm-index-info l">
@@ -219,13 +222,28 @@
 </div>
 
 <!-- 右边发帖，回顶部 -->
+<%--
 <div class="fixedBar" id="j_fixedBar">
     <a id="newTopicBtn" href="javascript:;" class="newTopic"><span></span>发帖</a>
     <a href="#" class="goTop"><i></i><span>返回<br/>顶部</span></a>
 </div>
+--%>
+
+
+<!-- 右边发帖，回顶部 -->
+
+<div class="fixedBar" id="j_fixedBar">
+    <c:if test="${not empty user.username && ! (user.username eq null)}">
+    <a id="newTopicBtn" href="javascript:;" class="newTopic"><span></span>发帖</a>
+    </c:if>
+    <c:if test="${empty user.username || (user.username eq null)}">
+    <a href="javascript:alert('您还未登录，请先登录')" class="newTopic"><span></span>发帖</a>
+    </c:if>
+    <a href="#" class="goTop"><i></i><span>返回<br/>顶部</span></a>
+</div>
 
 <!-- 发帖弹出框 -->
-<form action="" method="post">
+<form action="${pageContext.request.contextPath}/article/add.do" method="post">
     <div class="pop-box ft-box">
         <div class="mask"></div>
         <div class="win">
@@ -234,6 +252,7 @@
             </div>
             <div class="win_bd">
                 <div class="win_bd_t">
+                    <input type="hidden" name="zoneid" value="${zoneid}"/>
                     <input type="text" id="title" name="title" placeholder="帖子标题"/>
                 </div>
                 <div class="win_bd_b">

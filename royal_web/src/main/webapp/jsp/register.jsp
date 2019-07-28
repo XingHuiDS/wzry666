@@ -54,7 +54,7 @@
         </div>
         <div class="hm-header-b">
             <i class="hm-ico-home"></i>
-            <a href="index.html">首页</a><span>></span>注册页面
+            <a href="index.jsp">首页</a><span>></span>注册页面
         </div>
     </div>
 </div>

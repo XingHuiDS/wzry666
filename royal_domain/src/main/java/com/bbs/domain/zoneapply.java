@@ -1,16 +1,14 @@
 package com.bbs.domain;
 
-import java.io.Serializable;
-
 /**
- * 新增板块
+ * 板块申请表
  */
-public class zoneapply implements Serializable {
-    private Integer applyZoneId;
+public class ZoneApply {
+    private Integer applyZoneId;//板块申请表ID(主键非空自增)
     private String zoneName;//新增板块名字
     private String userName;//用户名
     private String reason;//申请原因
-    private Integer status;//处理状态（未处理-0，已处理-1）
+    private Integer status;//处理状态(未处理-0,已处理-1)
 
     public Integer getApplyZoneId() {
         return applyZoneId;
@@ -54,7 +52,7 @@ public class zoneapply implements Serializable {
 
     @Override
     public String toString() {
-        return "zoneapply{" +
+        return "ZoneApply{" +
                 "applyZoneId=" + applyZoneId +
                 ", zoneName='" + zoneName + '\'' +
                 ", userName='" + userName + '\'' +
