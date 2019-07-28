@@ -82,9 +82,17 @@
                             <div class="floor-ans"></div>
                         </div>
 
-                        <span class="icon-comment">
-                                <a href="#comment"> <i></i> 评论</a>
-                            </span>
+                        <span  class="icon-comment" >
+                                <a href="#comment" > <i></i> 评论</a>
+
+
+                               <span id="dianZan" >
+                              <a href="javascript:;"   onclick="upvoteCount2()" ><i id="id1" ></i>点赞</a>
+					     </span>
+
+                              <a id="juBao" href="#" > <i id="id2"></i> 举报</a>
+                        </span>
+
 
                     </div>
                 </li>
@@ -192,7 +200,7 @@
             </div>
             <div class="win_bd">
                 <div class="win_bd_b">
-                    <textarea id="reportContent" name="reportContent" placeholder="正文"></textarea>
+                    <textarea id="reportContent" name="reportContent" placeholder="请输入举报内容......"></textarea>
                 </div>
                 <div>
                     <input type="hidden" name="articleId" value="${article.articleId}">
@@ -264,6 +272,10 @@
                             '                                     <i></i>\n' +
                             '                                  ' + data.upvoteCount + '\n' +
                             '                             </a>');
+                        $("#dianZan").html('<a  href="javascript:;"  onclick="upvoteCount2()" >\n' +
+                            '                                     <i id="id1"></i>取消点赞\n' +
+                            '                             </a>');
+                        $("#id1").css("background-position","-112px -32px");
                     }
                 })
             } else {
@@ -278,12 +290,61 @@
                             "                                  " + data.upvoteCount + "\n" +
                             "                             </a>");
                         $("#flag").val(0);
+                        $("#dianZan").attr("class", "icon-like").html('<a  href="javascript:;"  onclick="upvoteCount2()" >\n' +
+                            '                                     <i id="id1"></i>点赞\n' +
+                            '                             </a>');
                     }
                 })
             }
         } else {
             alert("请登录");
             ala($('#login'));
+        }
+
+    }
+
+    //更新点赞数2
+    // <a href="javascript:;"   onclick="upvoteCount2()"><i id="id1"></i>点赞</a>
+    function upvoteCount2() {
+        if ('${sessionScope.user.userName}' !== '') {
+            if ($("#flag").val() === '0') {
+
+                $.ajax({
+                    "url": ${pageContext.request.contextPath}"/upvote/addUpvoteCount?isUpvote=1&articleId=" + '${article.articleId}' + "&upvoteUserName=" + '${sessionScope.user.userName}',
+                    "type": "POST",
+                    "success": function (data) {
+                        $("#flag").val(1);
+
+                        $("#dianZan").html('<a  href="javascript:;"  onclick="upvoteCount2()" >\n' +
+                            '                                     <i id="id1"></i>取消点赞\n' +
+                            '                             </a>');
+                        $("#id1").css("background-position","-112px -32px");
+                        $("#like").attr("class", "icon-liked").html('<a  href="javascript:;" id="upvoteCount" onclick="upvoteCount()" >取消点赞\n' +
+                            '                                     <i></i>\n' +
+                            '                                  ' + data.upvoteCount + '\n' +
+                            '                             </a>');
+                    }
+                })
+
+            } else {
+
+                $.ajax({
+                    "url": ${pageContext.request.contextPath}"/upvote/deleteUpvoteCount?isUpvote=0&articleId=" + '${article.articleId}' + "&upvoteUserName=" + '${sessionScope.user.userName}',
+                    "type": "POST",
+                    "success": function (data) {
+                        $("#flag").val(0);
+                        $("#dianZan").attr("class", "icon-like").html('<a  href="javascript:;"  onclick="upvoteCount2()" >\n' +
+                            '                                     <i id="id1"></i>点赞\n' +
+                            '                             </a>');
+                        $("#like").attr("class", "icon-like").html("<a  href=\"javascript:;\" id=\"upvoteCount\" onclick=\"upvoteCount()\" >点赞\n" +
+                            "                                     <i></i>\n" +
+                            "                                  " + data.upvoteCount + "\n" +
+                            "                             </a>");
+
+
+                    }
+                })
+            }
         }
 
     }
@@ -317,7 +378,26 @@
             alert("您已被禁言!");
         }
     });
+    //弹出举报2
+    $(function () {
+        $('#juBao').click(function () {
+            if (${sessionScope.user == null}) {
+                alert("请登录账户");
+                // ala("#login");
+            } else {
+                if ('${article.senderName}' === '${sessionScope.user.userName}') {
+                    alert("不能举报自己");
+                } else {
+                    $('.report-box').fadeIn(120);
+                }
 
+            }
+        });
+
+        if ('${sessionScope.msg}' === '1') {
+            alert("您已被禁言!");
+        }
+    });
 
     <%--获取评论回复函数--%>
 
